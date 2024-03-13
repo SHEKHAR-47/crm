@@ -86,7 +86,7 @@ return true;
             </div>
             <div class="form-group">
               <label for="phone" class="control-label">Contact Number</label>
-              <input type="text"  pattern="[0-9]{11}" class="form-control rounded-0" id="phone" name="phone" required="required">
+              <input type="text"  pattern="[0-9]{10}" class="form-control rounded-0" id="phone" name="phone" required="required">
             </div>
             
             <div class="form-group">
