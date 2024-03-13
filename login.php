@@ -1,46 +1,43 @@
 <?php
 session_start();
-error_reporting(0);
+error_reporting(1);
 include("dbconnection.php");
-if(isset($_POST['login']))
-{
-$ret=mysqli_query($con,"SELECT * FROM user WHERE email='".$_POST['email']."' and password='".$_POST['password']."'");
-$num=mysqli_fetch_array($ret);
-if($num>0)
-{
-$_SESSION['login']=$_POST['email'];
-$_SESSION['id']=$num['id'];
-$_SESSION['name']=$num['name'];
-$val3 =date("Y/m/d");
-date_default_timezone_set("Asia/Calcutta");
-$time=date("h:i:sa");
-$tim = $time;
-$ip_address=$_SERVER['REMOTE_ADDR'];
-$geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip_address;
-$addrDetailsArr = unserialize(file_get_contents($geopluginURL)); 
-$city = $addrDetailsArr['geoplugin_city']; 
-$country = $addrDetailsArr['geoplugin_countryName'];
-ob_start();
-system('ipconfig /all');
-$mycom=ob_get_contents();
-ob_clean();
-$findme = "Physical";
-$pmac = strpos($mycom, $findme);
-$mac=substr($mycom,($pmac+36),17);
-$ret=mysqli_query($con,"insert into usercheck(logindate,logintime,user_id,username,email,ip,mac,city,country)values('".$val3."','".$tim."','".$_SESSION['id']."','".$_SESSION['name']."','".$_SESSION['login']."','$ip_address','$mac','$city','$country')");
+if(isset($_POST['login'])) {
+  $ret=mysqli_query($con,"SELECT * FROM user WHERE email='".$_POST['email']."' and password='".$_POST['password']."'");
+  $num=mysqli_fetch_array($ret);
+  if($num>0) {
+    $_SESSION['login']=$_POST['email'];
+    $_SESSION['id']=$num['id'];
+    $_SESSION['name']=$num['name'];
+    $val3 =date("Y/m/d");
+    date_default_timezone_set("Asia/Calcutta");
+    $time=date("h:i:sa");
+    $tim = $time;
+    $ip_address=$_SERVER['REMOTE_ADDR'];
+    $geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip_address;
+    $addrDetailsArr = unserialize(file_get_contents($geopluginURL)); 
+    $city = $addrDetailsArr['geoplugin_city']; 
+    $country = $addrDetailsArr['geoplugin_countryName'];
+    ob_start();
+    system('ipconfig /all');
+    $mycom=ob_get_contents();
+    ob_clean();
+    $findme = "Physical";
+    $pmac = strpos($mycom, $findme);
+    $mac=substr($mycom,($pmac+36),17);
+    $ret=mysqli_query($con,"insert into usercheck(logindate,logintime,user_id,username,email,ip,mac,city,country)values('".$val3."','".$tim."','".$_SESSION['id']."','".$_SESSION['name']."','".$_SESSION['login']."','$ip_address','$mac','$city','$country')");
 
-$extra="dashboard.php";
-echo "<script>window.location.href='".$extra."'</script>";
-exit();
-}
-else
-{
-$_SESSION['action1']="Invalid username or password";
-$extra="login.php";
-
-echo "<script>window.location.href='".$extra."'</script>";
-exit();
-}
+    $extra="dashboard.php";
+    // echo "<script>window.location.href='".$extra."'</script>";
+    header("Location: dashboard.php");
+    exit();
+  } else {
+    $_SESSION['action1']="Invalid username or password";
+    $extra="login.php";
+    header("Location: login.php");
+    // echo "<script>window.location.href='".$extra."'</script>";
+    exit();
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -84,7 +81,8 @@ exit();
                 <input type="password" class="form-control rounded-0" id="password" name="password" required="required">
               </div>
               <div class="form-group text-center">
-                <button class="btn btn-primary btn-cons pull-right" name="login" type="submit">Login</button>
+               <a href="dashboard.php"> <button class="btn btn-primary btn-cons pull-right" name="login" type="submit">Login</button></a>
+                
               </div>
             </form>
         </div>
