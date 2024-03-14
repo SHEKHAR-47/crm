@@ -23,6 +23,8 @@
           <li ><a href="get-quote.php"> <span class="fa fa-tasks"></span> Request a Quote</a></li>
           <li ><a href="create-ticket.php"><span class="fa fa-ticket"></span> Create Ticket</a></li>
           <li ><a href="view-tickets.php"><span class="fa fa-ticket"></span> View Ticket</a></li>
+          <li ><a href="create-orders.php"><span class="fa fa-ticket"></span> Create Orders</a></li>
+          <li ><a href="view-orders.php"><span class="fa fa-ticket"></span> View Orders</a></li>
           <li><a href="profile.php"><span class="fa fa-user"></span> Profile</a></li>
           <li><a href="change-password.php"><span class="fa fa-file-text-o"></span> Change Password</a></li>
                            
