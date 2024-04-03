@@ -61,11 +61,13 @@ include("dbconnection.php");
                 <div class="controller"> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
                 <?php $prequest=mysqli_query($con,"select * from prequest where email='".$_SESSION['login']."'");
                 $pnum=mysqli_num_rows($prequest);
+                // var_dump($pnum);
+              
                 ?>
                 <div class="heading"> <span class="fa fa-ticket"></span>
                 <a href="get-quote.php" style="color:#FFF">Total Quotes</a>
                  </div>
-                <h3 class="text-right text-white"><span class="animate-number" data-value="<?php echo $num;?>" data-animation-duration="1200"><?= $pnum ?></span></h3>
+                <h3 class="text-right text-white"><span class="animate-number" data-value="<?php echo $pnum;?>" data-animation-duration="1200"><?= $pnum ?></span></h3>
               </div>
             </div>
           </div>
