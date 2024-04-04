@@ -112,7 +112,7 @@ while($rw=mysqli_fetch_array($query)){
         <?php for($i = 1; $i <= 5; $i++): ?>
         <div class="form-group">
             <label class="check">
-            <input type="checkbox" class="icheckbox" name="services[]" value="Service/Support Needed 10<?= $i ?>"/> Service/Support Needed 10<?= $i ?></label>
+            <input type="checkbox" class="icheckbox" name="services[]" value="Service/Support Needed 10<?= $i ?>"/> product<?= $i ?></label>
         </div>
         <?php endfor ?>
     </div>
@@ -135,7 +135,7 @@ while($rw=mysqli_fetch_array($query)){
                                             </div>
                                             
                                                <div class="form-group">                                        
-                                                <label class="col-md-3 text-left text-left control-label">Company</label>
+                                                <label class="col-md-3 text-left text-left control-label">Company-(username)</label>
                                                 <div class="col-md-9">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -151,7 +151,7 @@ while($rw=mysqli_fetch_array($query)){
                                                 <?php for($i = 6; $i <= 10; $i++): ?>
                                                     <div class="form-group">
                                                         <label class="check">
-                                                        <input type="checkbox" class="icheckbox" name="services[]" value="Service/Support Needed 10<?= $i ?>"/> Service/Support Needed 10<?= $i ?></label>
+                                                        <input type="checkbox" class="icheckbox" name="services[]" value="Service/Support Needed 10<?= $i ?>"/> product<?= $i ?></label>
                                                     </div>
                                                     <?php endfor ?>
                                                 </div>

@@ -59,6 +59,45 @@ echo "<script>alert('Ticket Genrated'); location.replace(document.referrer)</scr
     <!-- END SIDEBAR MENU --> 
   </div>
   </div>
+  <?php
+  // Database connection parameters
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "scrm_db";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+
+
+
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+ 
+
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $item_name = $_POST['item_name'];
+    $quantity = $_POST['quantity'];
+    $user_id = $_POST['user_id'];
+
+    // SQL query to insert data into the 'order' table
+    $sql = "INSERT INTO `order` (item_name, quantity, username, uid) VALUES ('$item_name', '$quantity', '$user_id' ,1 )";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+ 
+  ?>
   <!-- END SIDEBAR --> 
   <!-- BEGIN PAGE CONTAINER-->
   <div class="page-content"> 
@@ -74,9 +113,35 @@ echo "<script>alert('Ticket Genrated'); location.replace(document.referrer)</scr
     <div class="content">  
 		<div class="page-title">	
 			<h3>Create orders</h3>
-             <div class="row">
-                       
-                    </div>                    
+      <div class="col-md-12">
+        <div class="panel panel-default">
+        <form method="post" action="">
+            <div class="form-group">
+                <label for="item_name">Item Name:</label>
+                <input type="text" class="form-control" id="item_name" name="item_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" required>
+            </div>
+
+            <div class="form-group">
+                <label for="user_id">User name</label>
+                <input type="text" class="form-control" id="user_id" name="user_id" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+          </div>
+                             
+          <!-- <div class="panel-body bg-white">   
+
+          </div>  -->
+      </div>
+        </form>
+
             	
 		</div>
     </div>

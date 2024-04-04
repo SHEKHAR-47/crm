@@ -75,6 +75,53 @@ echo "<script>alert('Ticket Genrated'); location.replace(document.referrer)</scr
 		<div class="page-title">	
 			<h3>View orders</h3>
              <div class="row">
+             <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>User name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Database connection parameters
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "scrm_db";
+
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                // SQL query to select data from the 'order' table
+                $sql = "SELECT * FROM `order`";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    // Output data of each row
+                    $count = 1;
+                    while($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $count++ . "</td>";
+                        echo "<td>" . $row["item_name"] . "</td>";
+                        echo "<td>" . $row["quantity"] . "</td>";
+                        echo "<td>" . $row["username"] . "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='4'>No orders found</td></tr>";
+                }
+                $conn->close();
+                ?>
+            </tbody>
+        </table>
                        
                     </div>                    
             	
